@@ -1,4 +1,5 @@
 #pragma once
+#include "GameObject.h"
 #include "CubeMan_Light.h"
 #include "Obj.h"
 

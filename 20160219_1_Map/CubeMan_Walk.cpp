@@ -22,22 +22,22 @@ void CubeMan_Walk::Update()
 	GameObject::Update();
 
 	walkingMap->GroundCheck(position);
-
+	
 	float tick = (float)GameManager::GetTick();
 	jumpTime += tick;
 
 	if ((GetAsyncKeyState('A') & 0x8000) != 0)
 	{
-		rotationAngle -= (rotationSpeed * tick);
+		rotationAngle -= (rotationSpeed * 0.015f);
 	}
 	else if ((GetAsyncKeyState('D') & 0x8000) != 0)
 	{
-		rotationAngle += (rotationSpeed * tick);
+		rotationAngle += (rotationSpeed * 0.015f);
 	}
 
 	if ((GetAsyncKeyState('W') & 0x8000) != 0)
 	{
-		position += (direction * moveSpeed * tick);
+		position += (direction * moveSpeed * 0.015f);
 
 		bool wasPressed = keyState[FORWARD];
 		if (wasPressed == false)
@@ -60,7 +60,7 @@ void CubeMan_Walk::Update()
 
 	if ((GetAsyncKeyState('S') & 0x8000) != 0)
 	{
-		position -= (direction * moveSpeed * tick);
+		position -= (direction * moveSpeed * 0.015f);
 
 		bool wasPressed = keyState[BACKWARD];
 		if (wasPressed == false)

@@ -18,22 +18,18 @@ void GameState_Picking::Initialize()
 		grid = new Grid;
 		grid->Initialize();
 	}	
-	if ( objBox == nullptr )
-	{
-		objBox = new Obj();
-		objBox->Initialize("Box.obj");
-		objBox->SetPosition(D3DXVECTOR3(10, 0, 10));
-	}
+
 	if ( objMap == nullptr )
 	{
 		objMap = new Obj();
-		objMap->Initialize("map.obj", "map_surface.obj");		
+		objMap->Initialize("build.obj", "build.obj");		
 	}
+
 	if ( cubeMan == nullptr )
 	{
 		cubeMan = new CubeMan_Walk;
 		cubeMan->Initialize();
-		cubeMan->SetPosition(D3DXVECTOR3(-1, 0, -1));
+		cubeMan->SetPosition(D3DXVECTOR3(0, 0, 0));
 		cubeMan->SetWalkingMap(objMap);
 	}
 	Reset();
@@ -43,7 +39,6 @@ void GameState_Picking::Destroy()
 {
 	SAFE_DELETE(cubeMan);
 	SAFE_DELETE(objMap);
-	SAFE_DELETE(objBox);	
 	SAFE_DELETE(grid);	
 }
 
@@ -57,10 +52,6 @@ void GameState_Picking::Update()
 	{
 		cubeMan->Update();
 	}
-	if ( objBox )
-	{
-		objBox->Update();
-	}
 }
 
 void GameState_Picking::Render()
@@ -69,26 +60,24 @@ void GameState_Picking::Render()
 	{
 		grid->Render();
 	}
+
 	if ( objMap )
 	{
 		objMap->Render();
 	}
-	if ( objBox )
-	{
-		objBox->Render();
-	}
+
 	if ( cubeMan )
 	{
 		cubeMan->Render();
 	}
-
 }
 
 void GameState_Picking::OnEnterState()
 {
-	GameManager::GetCamera()->SetDistance(30.0f);
+	GameManager::GetCamera()->SetDistance(5.0f);
 	Initialize();
 	GameManager::GetCamera()->SetLookTarget(cubeMan->GetPositionAdress());
+	GameManager::GetCamera()->setCamRotY(cubeMan->getRotationAngleAddress());
 }
 
 void GameState_Picking::OnLeaveState()

@@ -7,7 +7,7 @@ public:
 	Grid();
 	~Grid();
 
-	void Initialize(int lineCount = 30, float interval = 1.0f);
+	void Initialize(int lineCount = 10, float interval = 1.0f);
 	void Destroy();
 	void Render();
 

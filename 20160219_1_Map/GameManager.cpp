@@ -84,7 +84,7 @@ void GameManager::Initialize(HWND handle)
 	//조명 초기화 및 세팅
 	ZeroMemory(&mainLight, sizeof(D3DLIGHT9));
 	mainLight.Type = D3DLIGHTTYPE::D3DLIGHT_DIRECTIONAL;
-	mainLight.Ambient = D3DXCOLOR(0.7f, 0.7f, 0.7f, 1.0f);
+	mainLight.Ambient = D3DXCOLOR(0.9f, 0.9f, 0.9f, 1.0f);
 	mainLight.Diffuse = D3DXCOLOR(0.7f, 0.7f, 0.7f, 1.0f);
 	mainLight.Specular = D3DXCOLOR(0.7f, 0.7f, 0.7f, 1.0f);
 	D3DXVECTOR3 direction(-1.0f, -2.0f, -1.0f);

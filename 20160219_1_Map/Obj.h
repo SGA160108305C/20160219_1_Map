@@ -22,7 +22,7 @@ private:
 	D3DXMATRIX world;
 	D3DXMATRIX rotation;
 
-	D3DXVECTOR3 position = D3DXVECTOR3(0, 0, 0);
+	D3DXVECTOR3 position = D3DXVECTOR3(-13.4f, 12.2f, 12.5f);
 
 	std::vector<ObjFileGroup*> objGroups;
 	std::vector<D3DXVECTOR3> objGround;

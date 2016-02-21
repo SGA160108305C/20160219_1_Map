@@ -20,8 +20,16 @@ void Obj::Initialize(char* mapFileName, char* groundFileName /*= nullptr*/)
 	{
 		ObjLoader::LoadObj_OnlyVertex(objGround, groundFileName);
 	}
-	printf_s("test -> %d\n", objGround.size());
+	printf_s("size: %d\n", objGround.size());
 	D3DXMatrixIdentity(&world);
+
+	D3DXMATRIXA16 scale, rotation, translation;
+
+	D3DXMatrixScaling(&scale, 1, 1, 1);
+	D3DXMatrixRotationY(&rotation, 0.0f);
+	D3DXMatrixTranslation(&translation, position.x, position.y, position.z);
+
+	world = (scale * rotation * translation);
 }
 
 void Obj::Destroy()
@@ -68,7 +76,13 @@ bool Obj::GroundCheck(IN OUT D3DXVECTOR3& groundPos) const
 			&distance) != 0;
 		if (find == true)
 		{
-			groundPos.y = 1000.0f - distance;
+			if (groundPos.y > distance)
+			{
+				printf_s("distance -> %.2f\n", distance);
+				groundPos.y = 1000.0f - distance;
+			}
+
+			printf_s("positionY: %.2f / distance -> %.2f\n", groundPos.y, distance);
 			//groundPos = objGround[i] + ( ( objGround[i + 1] - objGround[i] ) * u ) + ( ( objGround[i + 2] - objGround[i] ) * v );
 			break;
 		}

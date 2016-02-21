@@ -14,13 +14,14 @@ public:
 	
 	inline void SetLookTarget(D3DXVECTOR3* target){ lookTarget = target;  }
 	inline void SetDistance(float distance){ camDistance = distance; }
+	inline void setCamRotY(float* target) { camRotYTarget = target; }
 
 private:
 	D3DXVECTOR3 eyePosition = D3DXVECTOR3(0, 0, 0);
 	D3DXVECTOR3 lookAt = D3DXVECTOR3(0, 0, 0);
 	D3DXVECTOR3 upVector = D3DXVECTOR3(0, 1, 0);
 
-	float camRotX = 0.53f;		//radian
+	float camRotX = 0.3f;		//radian
 	float camRotY = 0.0f;
 	float camDistance = 4.5f;
 	
@@ -28,6 +29,6 @@ private:
 	POINT prevMousePos;
 
 	D3DXVECTOR3* lookTarget = nullptr;
-
+	float* camRotYTarget = nullptr;
 };
 

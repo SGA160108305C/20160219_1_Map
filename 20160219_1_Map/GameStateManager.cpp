@@ -35,7 +35,7 @@ void GameStateManager::Initialize()
 	gameStates[GameStateType::STATE_SHADER] = nullptr;
 	gameStates[GameStateType::STATE_THREAD] = nullptr;
 	
-	currentState = GameStateType::STATE_OBJ_LOAD;
+	currentState = GameStateType::STATE_PICK_BASE;
 	gameStates[currentState]->OnEnterState();
 }
 

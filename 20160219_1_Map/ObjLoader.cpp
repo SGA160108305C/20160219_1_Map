@@ -250,12 +250,12 @@ void ObjLoader::LoadObj_OnlyVertex(OUT std::vector<D3DXVECTOR3>& vertex, char* f
 	strcat_s(fullPath, fileName);
 	FILE* fp;
 	fopen_s(&fp, fullPath, "r");
-
+	int count = 0;
 	if (fp != nullptr)
 	{
 		while (!feof(fp))
 		{
-			vertex.clear();
+			count++;
 			char tempBuffer[1024];
 			fgets(tempBuffer, 1024, fp);
 			//OutputDebugString(tempBuffer);
@@ -263,30 +263,30 @@ void ObjLoader::LoadObj_OnlyVertex(OUT std::vector<D3DXVECTOR3>& vertex, char* f
 			if (tempBuffer[0] == 'v' && tempBuffer[1] == ' ')
 			{
 				D3DXVECTOR3 v;
-				sscanf_s(tempBuffer, "%*s %f %f %f", &v.x, &v.z, &v.y);
+				sscanf_s(tempBuffer, "%*s %f %f %f", &v.x, &v.y, &v.z);
 				pos.push_back(v);
 			}
 
 			else if (tempBuffer[0] == 'f')
 			{
-				int posIndex[3], uvIndex[3], normalIndex[3];
+				int posIndex[3];
 				int destBufferSize = sizeof(int);
 
 				int res = sscanf_s(tempBuffer,
-					"%*s %d/%d/%d %d/%d/%d %d/%d/%d",
-					&posIndex[0], &uvIndex[0], &normalIndex[0],
-					&posIndex[1], &uvIndex[1], &normalIndex[1],
-					&posIndex[2], &uvIndex[2], &normalIndex[2],
-					destBufferSize, destBufferSize, destBufferSize,
-					destBufferSize, destBufferSize, destBufferSize,
-					destBufferSize, destBufferSize, destBufferSize
+					"%*s %d/%d/%d %*d/%*d/%*d %*d/%*d/%*d",
+					&posIndex[0],
+					&posIndex[1],
+					&posIndex[2],
+					destBufferSize,
+					destBufferSize,
+					destBufferSize
 					);
 
-				assert(res == 9 && "The format of face is not conforming to this loader!");
+				assert(res == 3 && "The format of face is not conforming to this loader!");
 
 				vertex.push_back(pos[posIndex[0] - 1]);
-				vertex.push_back(pos[posIndex[2] - 1]);
 				vertex.push_back(pos[posIndex[1] - 1]);
+				vertex.push_back(pos[posIndex[2] - 1]);
 			}
 		}
 

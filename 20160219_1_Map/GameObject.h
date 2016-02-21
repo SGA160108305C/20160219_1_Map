@@ -12,6 +12,8 @@ public:
 
 	inline const D3DXVECTOR3& GetPosition(){ return position; }
 	inline D3DXVECTOR3* GetPositionAdress(){ return &position; }
+	inline float* getRotationAngleAddress() { return &rotationAngle; }
+
 	inline void SetPosition(const D3DXVECTOR3& pos){ position = pos; }
 	inline void SetDirection(const D3DXVECTOR3& dir){ direction = dir; }
 	inline void SetAngle(const float angle){ rotationAngle = angle; }

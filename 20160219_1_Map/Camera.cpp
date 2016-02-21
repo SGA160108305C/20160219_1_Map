@@ -16,6 +16,7 @@ void Camera::Initialize(D3DXVECTOR3* target /*= nullptr*/)
 {
 	lookTarget = target;
 
+
 	D3DXMATRIXA16 matView;
 	D3DXMATRIXA16 matProjection;
 	D3DXMatrixLookAtLH(&matView, &eyePosition, &lookAt, &upVector);
@@ -35,6 +36,12 @@ void Camera::Update()
 	D3DXMATRIXA16 matRotationX, matRotationY;
 	D3DXMATRIXA16 matRotation;
 	D3DXMatrixRotationX(&matRotationX, camRotX);
+
+	if (camRotYTarget)
+	{
+		camRotY = (*camRotYTarget);
+	}
+
 	D3DXMatrixRotationY(&matRotationY, camRotY);
 	matRotation = matRotationX * matRotationY;
 
@@ -43,8 +50,8 @@ void Camera::Update()
 
 	if ( lookTarget )
 	{
-		lookAt = (*lookTarget);
-		eyePosition = (*lookTarget) + eyePosition;
+		lookAt = (*lookTarget) + D3DXVECTOR3(0, 3, 0);
+		eyePosition = lookAt + eyePosition;
 	}
 
 	D3DXMATRIXA16 matView;
