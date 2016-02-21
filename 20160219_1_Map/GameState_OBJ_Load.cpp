@@ -22,7 +22,7 @@ void GameState_OBJ_Load::Initialize()
 	if ( objMap == nullptr )
 	{
 		objMap = new Obj();
-		objMap->Initialize("Modelo_con_Texturas.obj");		
+		objMap->Initialize("build.obj");		
 	}
 	Reset();
 }
